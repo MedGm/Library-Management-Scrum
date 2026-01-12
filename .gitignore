@@ -1,0 +1,41 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Testing
+coverage
+
+# Production
+build
+dist
+
+# Misc
+.DS_Store
+.env
+.npm
+*.log
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs
+*.njsproj
+*.sln
+*.sw?
+
+# Scrum Project Specific
+Sprint0_Report/*.aux
+Sprint0_Report/*.log
+Sprint0_Report/*.out
+Sprint0_Report/*.toc
+Sprint0_Report/*.fls
+Sprint0_Report/*.fdb_latexmk
+Sprint0_Report/*.synctex.gz

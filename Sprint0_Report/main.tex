@@ -1,0 +1,355 @@
+\documentclass[a4paper,12pt]{report}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{amssymb}
+
+% Configuration
+\geometry{hmargin=2.5cm,vmargin=2.5cm}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Rapport de Livraison - Sprint 0},
+    pdfauthor={Équipe Agile}
+}
+
+% Colors
+\definecolor{primary}{RGB}{76, 29, 149} % Indigo 900
+\definecolor{accent}{RGB}{124, 58, 237} % Indigo 600
+\definecolor{success}{RGB}{21, 128, 61} % Green 700
+
+% Custom Commands
+\newcommand{\statusdone}{\textcolor{success}{\textbf{DONE}}}
+
+% Header & Footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\textcolor{gray}{Livrable Sprint 0}}
+\lhead{\textcolor{primary}{\textbf{App Gestion Bibliothèque}}}
+\cfoot{\thepage}
+
+% Title Page
+\begin{document}
+
+% Custom Title Page
+\begin{titlepage}
+    \centering
+    \vspace*{1cm}
+    
+    \textbf{\Large Cycle Ingénieure - Logiciels et Systèmes Intelligents}
+    
+    \vspace{0.5cm}
+    \rule{\linewidth}{0.5mm}
+    \vspace{0.5cm}
+    
+    {\Huge \textbf{RAPPORT DE LIVRAISON}} \\
+    \vspace{0.5cm}
+    {\huge \textbf{SPRINT 0}}
+    
+    \vspace{0.5cm}
+    \rule{\linewidth}{0.5mm}
+    \vspace{1.5cm}
+    
+    \textbf{\Large Projet : Application de gestion de bibliothèque}
+    
+    \vspace{2.5cm}
+
+    % Main Image (Login Screen)
+    \begin{figure}[h]
+        \centering
+        \fbox{\includegraphics[width=6cm]{images/logo.png}}
+    \end{figure}
+    
+    \vfill
+    
+    \begin{minipage}{0.4\textwidth}
+        \begin{flushleft} \large
+            \emph{Auteurs :}\\
+            \textbf{Équipe Agile}
+        \end{flushleft}
+    \end{minipage}
+    \begin{minipage}{0.4\textwidth}
+        \begin{flushright} \large
+            \emph{Date :} \\
+            11 Janvier 2026
+        \end{flushright}
+    \end{minipage}
+    
+    \vspace*{1cm}
+\end{titlepage}
+
+
+\tableofcontents
+\newpage
+
+\chapter{Contexte et Méthodologie}
+
+\section{Problématique}
+Le projet consiste à concevoir et développer une solution informatique complète de **Gestion de Bibliothèque**. L'objectif est de remplacer les processus manuels ou obsolètes par une application web moderne permettant :
+\begin{itemize}
+    \item La gestion centralisée des ouvrages (Catalogue, Stocks).
+    \item L'administration des utilisateurs (Étudiants, Enseignants, Bibliothécaires).
+    \item Le suivi rigoureux des emprunts, retours et pénalités.
+\end{itemize}
+Le développement suit l'architecture **Full-Stack** (Frontend/Backend) et s'appuie sur la méthode agile **SCRUM**.
+
+\section{Stratégie Scrum et Organisation}
+L'équipe a adopté la méthode Scrum pour garantir des livraisons itératives et fonctionnelles.
+
+\subsection{Organisation des Sprints}
+\begin{itemize}
+    \item \textbf{Durée :} 1 semaine par Sprint (Cycle court pour feedback rapide).
+    \item \textbf{Cérémonies :}
+    \begin{itemize}
+        \item \textbf{Sprint Planning :} Définition du Sprint Goal et sélection des US (Lundi matin).
+        \item \textbf{Daily Scrum :} Point de coordination quotidien de 15 min.
+        \item \textbf{Sprint Review :} Démonstration de l'incrément (Fin de Sprint).
+        \item \textbf{Sprint Retrospective :} Analyse des points d'amélioration (Après la Review).
+    \end{itemize}
+\end{itemize}
+
+\subsection{Outils et Environnement}
+\begin{itemize}
+    \item \textbf{Gestion de Projet :} Jira Software (Workflow, Backlogs, Tableaux).
+    \item \textbf{Versionning :} GitHub.
+    \item \textbf{Développement :} VS Code, Node.js, React, Prisma.
+\end{itemize}
+
+\section{Workflow et Statuts Jira}
+Pour ce démarrage, nous avons utilisé un Workflow simplifié pour maîtriser l'outil Jira :
+\begin{itemize}
+    \item \textbf{À faire :} Tâche identifiée et estimée.
+    \item \textbf{En cours :} Tâche prise en charge par un développeur.
+    \item \textbf{Terminé :} Code commité, testé et validé.
+\end{itemize}
+\textit{Amélioration prévue :} Ajout d'un statut "En Test" ou "Code Review" pour les prochains sprints afin de renforcer la qualité.
+
+\chapter{Rapport de Livraison : Sprint 0}
+
+\section{Vue d'Ensemble}
+L'objectif principal du Sprint 0 était d'établir les fondations techniques et fonctionnelles de l'application. Il s'agissait de mettre en place l'architecture, la gestion des utilisateurs, et le catalogue de base pour permettre une première utilisation de bout en bout (\textit{"First Usable Increment"}).
+
+\section{Informations Générales}
+\begin{itemize}
+    \item \textbf{Période du Sprint :} 05/01/2026 au 12/01/2026 (1 semaine)
+    \item \textbf{Statut :} \statusdone
+    \item \textbf{Vélocité Réalisée :} 38 Points
+    \item \textbf{Outils utilisés :} Jira Software, GitHub.
+\end{itemize}
+
+\section{Rôles et Responsabilités}
+\begin{center}
+\begin{tabularx}{\textwidth}{lX}
+    \toprule
+    \textbf{Rôle} & \textbf{Responsabilité} \\
+    \midrule
+    \textbf{Product Owner} & \textbf{EL Gorrim Mohamed} - Définition de la vision, priorisation du Backlog. \\
+    \textbf{Scrum Master} & \textbf{Kchibal Ismail} - Facilitation des cérémonies, levée des obstacles. \\
+    \textbf{Dev Team} & \textbf{Mohand Omar Moussa, Essalhi Salma} - Développement Full-Stack, tests. \\
+    \bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Definition of Done (DoD) pour le Sprint 0}
+Pour qu'une User Story soit considérée comme "DONE", elle doit respecter les critères suivants :
+\begin{itemize}
+    \item[$\checkmark$] Code développé et commité sur la branche \texttt{main}.
+    \item[$\checkmark$] Tests unitaires passés (couverture > 80\%).
+    \item[$\checkmark$] Revue de code effectuée par un pair.
+    \item[$\checkmark$] Fonctionnalité testée et validée sur l'environnement de "Staging".
+    \item[$\checkmark$] Aucune régression critique détectée.
+\end{itemize}
+
+\chapter{Product Backlog \& Sprint Backlog}
+
+\section{Extrait du Product Backlog (Items Terminés)}
+Ci-dessous la liste des User Stories (US) priorisées et complétées durant ce sprint :
+
+\begin{center}
+\begin{longtable}{|p{2.5cm}|p{2cm}|p{8.5cm}|p{2.5cm}|}
+    \hline
+    \textbf{ID} & \textbf{Type} & \textbf{Titre / Résumé} & \textbf{Statut} \\
+    \hline
+    \endhead
+    LIBMGMT-163 & Story & Consulter Mon compte (LECTEUR) & \textbf{Terminé} \\
+    LIBMGMT-162 & Story & Lister / Rechercher / Filtrer utilisateurs (ADMIN) & \textbf{Terminé} \\
+    LIBMGMT-159 & Story & Créer un utilisateur (ADMIN) & \textbf{Terminé} \\
+    LIBMGMT-160 & Story & Modifier un utilisateur (ADMIN) & \textbf{Terminé} \\
+    LIBMGMT-161 & Story & Bloquer / Débloquer un utilisateur (ADMIN) & \textbf{Terminé} \\
+    \hline
+    LIBMGMT-166 & Story & Associer catégories/genres à un livre (BIBLIOTHÉCAIRE) & \textbf{Terminé} \\
+    LIBMGMT-165 & Story & Gérer les genres (BIBLIOTHÉCAIRE) & \textbf{Terminé} \\
+    LIBMGMT-164 & Story & Gérer les catégories (BIBLIOTHÉCAIRE) & \textbf{Terminé} \\
+    \hline
+    LIBMGMT-194 & Task & Mettre en place environnements dev/test & \textbf{Terminé} \\
+    LIBMGMT-193 & Task & Initialiser le dépôt + branches + conventions & \textbf{Terminé} \\
+    LIBMGMT-195 & Task & Mettre en place migrations + seed DB & \textbf{Terminé} \\
+    LIBMGMT-196 & Task & Standardiser gestion erreurs + logs & \textbf{Terminé} \\
+    LIBMGMT-157 & Story & Se connecter / Se déconnecter & \textbf{Terminé} \\
+    LIBMGMT-158 & Story & Accès sécurisé selon rôle & \textbf{Terminé} \\
+    \hline
+    LIBMGMT-171 & Story & Voir détail d’un livre (TOUS) & \textbf{Terminé} \\
+    LIBMGMT-170 & Story & Rechercher un livre (TOUS) & \textbf{Terminé} \\
+    LIBMGMT-169 & Story & Consulter la liste des livres (TOUS) & \textbf{Terminé} \\
+    LIBMGMT-168 & Story & Modifier / Archiver un livre (BIBLIOTHÉCAIRE) & \textbf{Terminé} \\
+    LIBMGMT-167 & Story & Ajouter un livre (BIBLIOTHÉCAIRE) & \textbf{Terminé} \\
+    \hline
+    LIBMGMT-175 & Story & Marquer perdu / réparation / archivé (BIBLIOTHÉCAIRE) & \textbf{Terminé} \\
+    LIBMGMT-174 & Story & Gérer le statut d’un exemplaire (BIBLIOTHÉCAIRE) & \textbf{Terminé} \\
+    LIBMGMT-173 & Story & Modifier un exemplaire (BIBLIOTHÉCAIRE) & \textbf{Terminé} \\
+    LIBMGMT-172 & Story & Ajouter un exemplaire (BIBLIOTHÉCAIRE) & \textbf{Terminé} \\
+    \hline
+    LIBMGMT-178 & Story & Consulter détail d’un emprunt (BIBLIOTHÉCAIRE) & \textbf{Terminé} \\
+    LIBMGMT-177 & Story & Lister les emprunts en cours (BIBLIOTHÉCAIRE) & \textbf{Terminé} \\
+    LIBMGMT-176 & Story & Créer un emprunt (BIBLIOTHÉCAIRE) & \textbf{Terminé} \\
+    \hline
+\end{longtable}
+\end{center}
+
+\chapter{Incrément Livré (Valeur Métier)}
+
+À l'issue de ce Sprint 0, nous livrons une \textbf{version Alpha fonctionnelle} de la plateforme \textit{Library Manager}.
+
+\section{Fonctionnalités Clés Disponibles}
+
+\subsection{Sécurité et Gestion des Utilisateurs}
+Le système de rôles est actif. Un membre ne peut pas accéder aux pages d'administration. L'interface d'inscription et de connexion a été soignée pour offrir une expérience utilisateur moderne.
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.85\textwidth]{images/register.png}}
+    \caption{Interface d'Inscription (Gestion des Utilisateurs)}
+    \label{fig:register}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.85\textwidth]{images/login.png}}
+    \caption{Interface de Connexion Sécurisée}
+    \label{fig:login}
+\end{figure}
+
+\subsection{Base de Connaissance \& Catalogue}
+Le catalogue supporte désormais 10 genres littéraires majeurs et permet une recherche multi-critères efficace.
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.9\textwidth]{images/filters.png}}
+    \caption{Catalogue avec Système de Filtrage Avancé}
+    \label{fig:filters}
+\end{figure}
+
+\subsection{Tableau de Bord \& Cycle de vie}
+Un livre peut être créé, emprunté, retourné, et passer par des états critiques (Perdu/Réparation). Le tableau de bord permet de suivre ces états.
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.9\textwidth]{images/dashboard.png}}
+    \caption{Tableau de Bord (Suivi des Emprunts)}
+    \label{fig:dashboard}
+\end{figure}
+
+\subsection{Contribution au Product Goal}
+Ce sprint valide la faisabilité technique du cœur de métier et pose l'infrastructure nécessaire pour les futures fonctionnalités.
+
+\chapter{Sprint Review \& Retrospective}
+
+\section{Sprint Review (Démonstration)}
+\textbf{Tenue le :} 11 Janvier 2026 à 10h00.\\
+\textbf{Présents :} Product Owner, Scrum Master, Équipe de développement, Parties prenantes.
+
+\subsection*{Déroulement}
+\begin{enumerate}
+    \item \textbf{Présentation du but :} Rappel de l'objectif "Foundation".
+    \item \textbf{Démonstration (Live Demo) :} Création de compte, Validation Admin, Recherche, Emprunt, Gestion de statut.
+    \item \textbf{Feedback reçu :}
+    \begin{itemize}
+        \item \textit{Positif :} La recherche est très rapide et réactive.
+        \item \textit{Amélioration :} Ajouter une photo de couverture pour les livres (Prévu Sprint 1).
+        \item \textit{Correction :} Format de date (US vs FR). \textbf{[HOTFIX APPLIQUÉ]}.
+    \end{itemize}
+    \item \textbf{Décision :} L'incrément est \textbf{VALIDÉ}. Passage au Sprint 1 autorisé.
+\end{enumerate}
+
+\section{Sprint Retrospective}
+\textbf{Tenue le :} 11 Janvier 2026 à 14h00.
+
+\subsection*{Ce qui s'est bien passé (Keep)}
+\begin{itemize}
+    \item La communication dans l'équipe a été fluide.
+    \item L'architecture modulaire a facilité le développement parallèle.
+    \item L'objectif du Sprint a été atteint sans dette technique majeure.
+\end{itemize}
+
+\subsection*{Ce qui a posé problème (Drop/Problem)}
+\begin{itemize}
+    \item Difficultés d'adaptation à l'outil Jira Software (première application de la méthode Scrum pour l'équipe).
+    \item Ambiguïtés sur la gestion des statuts "Perdu" vs "Supprimé".
+\end{itemize}
+
+\subsection*{Actions d'amélioration pour le Sprint 1 (Try)}
+\begin{itemize}
+    \item[$\square$] Mettre à jour le \texttt{README.md} avec des instructions d'installation locales plus claires.
+    \item[$\square$] Définir plus strictement les critères d'acceptation UI avant le dév.
+\end{itemize}
+
+\chapter{Métriques Agiles (Sprint 0)}
+
+\section{Velocity Chart}
+Sur les 38 points planifiés, \textbf{38 points ont été livrés}. Engagement respecté à 100\%. Cela établit une vélocité de référence de 38 pour le prochain sprint.
+
+\textit{\textbf{Note :} En raison d'une phase d'apprentissage de l'outil Jira Software durant ce premier sprint, les graphiques générés peuvent présenter des irrégularités. Ce point a été discuté en rétrospective et des mesures ont été prises pour assurer un suivi plus rigoureux dès le Sprint 1.}
+
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\textwidth]{velocity.png}}
+    \caption{Velocity Chart – Sprint 0}
+    \label{fig:velocity}
+\end{figure}
+
+\section{Burndown Chart (Analyse)}
+\textbf{Interprétation :} La courbe de progression (Reste à faire) a suivi une trajectoire bonne. Nous avons observé un léger plateau le jour 3 (difficultés outil), rattrapé le jour 4 grâce au "Swarming".
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\textwidth]{burndown.png}}
+    \caption{Burndown Chart - Sprint 0}
+    \label{fig:burndown}
+\end{figure}
+
+\section{Cumulative Flow Diagram}
+Les états des tickets ont montré un flux régulier :
+\begin{itemize}
+    \item \textbf{To Do :} S'est vidé progressivement.
+    \item \textbf{In Progress :} Jamais plus de 3 tâches en parallèle (respect du WIP Limit).
+    \item \textbf{Done :} Croissance constante jusqu'à la fin du sprint.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\textwidth]{cumulative_flow.png}}
+    \caption{Cumulative Flow Diagram}
+    \label{fig:cfd}
+\end{figure}
+
+\chapter*{Conclusion}
+Ce Sprint 0 est un succès. L'application est fonctionnelle, sécurisée, et visuellement aboutie. Nous sommes prêts à engager le Sprint 1 pour développer les fonctionnalités avancées.
+
+\end{document}
