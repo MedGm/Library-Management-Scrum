@@ -5,6 +5,7 @@ const { authenticateToken, authorizeRole } = require('../middleware/auth');
 
 router.post('/', authenticateToken, authorizeRole(['LIBRARIAN', 'ADMIN']), borrowingController.createBorrowing);
 router.put('/:id/return', authenticateToken, authorizeRole(['LIBRARIAN', 'ADMIN']), borrowingController.returnBook);
+router.post('/:id/renew', authenticateToken, authorizeRole(['LIBRARIAN']), borrowingController.renewBorrowing);
 router.get('/my', authenticateToken, borrowingController.getMyBorrowings);
 router.get('/', authenticateToken, authorizeRole(['LIBRARIAN', 'ADMIN']), borrowingController.getAllBorrowings);
 

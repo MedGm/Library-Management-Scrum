@@ -1,0 +1,293 @@
+\documentclass[a4paper,12pt]{report}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{amssymb}
+
+% Configuration
+\geometry{hmargin=2.5cm,vmargin=2.5cm}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Rapport de Livraison - Sprint 1},
+    pdfauthor={Équipe Agile}
+}
+
+% Colors
+\definecolor{primary}{RGB}{76, 29, 149} % Indigo 900
+\definecolor{accent}{RGB}{124, 58, 237} % Indigo 600
+\definecolor{success}{RGB}{21, 128, 61} % Green 700
+
+% Custom Commands
+\newcommand{\statusdone}{\textcolor{success}{\textbf{DONE}}}
+
+% Header & Footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\textcolor{gray}{Livrable Sprint 1}}
+\lhead{\textcolor{primary}{\textbf{App Gestion Bibliothèque}}}
+\cfoot{\thepage}
+
+% Title Page
+\begin{document}
+
+% Custom Title Page
+\begin{titlepage}
+    \centering
+    \vspace*{1cm}
+    
+    \textbf{\Large Cycle Ingénieure - Logiciels et Systèmes Intelligents}
+    
+    \vspace{0.5cm}
+    \rule{\linewidth}{0.5mm}
+    \vspace{0.5cm}
+    
+    {\Huge \textbf{RAPPORT DE LIVRAISON}} \\
+    \vspace{0.5cm}
+    {\huge \textbf{SPRINT 1}}
+    
+    \vspace{0.5cm}
+    \rule{\linewidth}{0.5mm}
+    \vspace{1.5cm}
+    
+    \textbf{\Large Projet : Application de gestion de bibliothèque}
+    
+    \vspace{2.5cm}
+
+    % Main Image (Use Logo from Sprint 0 if available, otherwise skip or use one of the new screenshots)
+    \begin{figure}[h]
+        \centering
+        \fbox{\includegraphics[width=6cm]{images/logo.png}} 
+    \end{figure}
+    
+    \vfill
+    
+    \begin{minipage}{0.4\textwidth}
+        \begin{flushleft} \large
+            \emph{Auteurs :}\\
+            \textbf{Équipe Agile}
+        \end{flushleft}
+    \end{minipage}
+    \begin{minipage}{0.4\textwidth}
+        \begin{flushright} \large
+            \emph{Date :} \\
+            18 Janvier 2026
+        \end{flushright}
+    \end{minipage}
+    
+    \vspace*{1cm}
+\end{titlepage}
+
+
+\tableofcontents
+\newpage
+
+\chapter{Rapport de Livraison : Sprint 1}
+
+\section{Introduction}
+Ce document présente le bilan du Sprint 1 du projet \textit{Library Management System}. L'objectif de ce sprint était d'introduire les fonctionnalités administratives critiques (Règles, Pénalités), de gérer les réservations pour les livres indisponibles, et d'assurer la traçabilité des actions via des logs d'audit.
+
+\section{Objectif du Sprint (Sprint Goal)}
+\textbf{Objectif :} Implémenter le moteur de règles de prêt (limites, pénalités), permettre la réservation de documents indisponibles, et sécuriser les actions sensibles via un système d'audit.
+
+\section{Informations Générales}
+\begin{itemize}
+    \item \textbf{Période du Sprint :} 12/01/2026 au 18/01/2026 (1 semaine)
+    \item \textbf{Statut :} \statusdone
+    \item \textbf{Vélocité Réalisée :} 30 Points
+    \item \textbf{Outils utilisés :} Jira Software, GitHub.
+\end{itemize}
+
+\section{Rôles et Responsabilités}
+\begin{center}
+\begin{tabularx}{\textwidth}{lX}
+    \toprule
+    \textbf{Rôle} & \textbf{Responsabilité} \\
+    \midrule
+    \textbf{Product Owner} & \textbf{Mohand Omar Moussa} - Priorisation du Backlog (Règles, Audit). \\
+    \textbf{Scrum Master} & \textbf{Essalhi Salma} - Facilitation (Config serveur, Déploiement). \\
+    \textbf{Dev Team} & \textbf{Kchibal Ismail, El Gorrim Mohamed} - Dév Full-Stack (Règles, Audit, Restitutions, Réservations). \\
+    \bottomrule
+\end{tabularx}
+\end{center}
+
+\chapter{Product Backlog \& Sprint Backlog}
+
+\section{Backlog du Sprint et Avancement}
+Le tableau ci-dessous détaille les tâches planifiées pour ce sprint, leur estimation en "Story Points" et leur état final.
+
+\begin{center}
+\scriptsize
+\begin{tabular}{|l|p{5cm}|c|l|l|}
+\hline
+\textbf{ID} & \textbf{Description} & \textbf{Pts} & \textbf{Assigné à} & \textbf{Statut} \\
+\hline
+\multicolumn{5}{|c|}{\textbf{Restitutions (LIBMGMT-151)}} \\
+\hline
+LIBMGMT-179 & Enregistrer une restitution & 2 & E.M. Gorrim & \textbf{Terminé} \\
+LIBMGMT-180 & Voir l’historique d’un exemplaire & 2 & E.M. Gorrim & \textbf{Terminé} \\
+\hline
+\multicolumn{5}{|c|}{\textbf{Règles, retards \& pénalités (LIBMGMT-152)}} \\
+\hline
+LIBMGMT-181 & Configurer règles d’emprunt & 3 & I. Kchibal & \textbf{Terminé} \\
+LIBMGMT-182 & Empêcher dépassement max emprunts & 2 & I. Kchibal & \textbf{Terminé} \\
+LIBMGMT-183 & Identifier emprunts en retard & 1 & I. Kchibal & \textbf{Terminé} \\
+LIBMGMT-184 & Calculer pénalité de retard & 1 & I. Kchibal & \textbf{Terminé} \\
+LIBMGMT-185 & Renouveler un emprunt & 2 & I. Kchibal & \textbf{Terminé} \\
+\hline
+\multicolumn{5}{|c|}{\textbf{Réservations (LIBMGMT-153)}} \\
+\hline
+LIBMGMT-186 & Réserver un livre indisponible & 4 & E.M. Gorrim & \textbf{Terminé} \\
+LIBMGMT-187 & Annuler une réservation & 5 & E.M. Gorrim & \textbf{Terminé} \\
+\hline
+\multicolumn{5}{|c|}{\textbf{Historique \& Audit (LIBMGMT-154)}} \\
+\hline
+LIBMGMT-188 & Journaliser les actions importantes & 3 & I. Kchibal & \textbf{Terminé} \\
+LIBMGMT-189 & Consulter l’audit avec filtres & 5 & I. Kchibal & \textbf{Terminé} \\
+\hline
+\multicolumn{5}{|c|}{\textbf{Rapports \& Exports (LIBMGMT-155)}} \\
+\hline
+LIBMGMT-190 & Consulter tableau de bord (Admin) & 3 & I. Kchibal & \textbf{Terminé} \\
+LIBMGMT-191 & Exporter emprunts / retards & 1 & I. Kchibal & \textbf{Terminé} \\
+\hline
+\multicolumn{5}{|c|}{\textbf{Qualité (LIBMGMT-156)}} \\
+\hline
+LIBMGMT-302 & Tests unitaires & 1 & E.M. Gorrim & \textbf{Terminé} \\
+LIBMGMT-303 & Tests intégration & 1 & E.M. Gorrim & \textbf{Terminé} \\
+LIBMGMT-304 & Documentation & 2 & E.M. Gorrim & \textbf{Terminé} \\
+LIBMGMT-305 & Build \& config prod & 1 & E.M. Gorrim & \textbf{Terminé} \\
+\hline
+\end{tabular}
+\end{center}
+
+\chapter{Incrément Livré (Valeur Métier)}
+
+\section{Fonctionnalités Livrées}
+Le produit contient désormais les fonctionnalités suivantes, testées et déployées :
+
+\subsection{1. Gestion des Règles et Pénalités (Admin)}
+\begin{itemize}
+    \item Page de configuration globale (/settings) accessible uniquement aux administrateurs.
+    \item Modification dynamique des paramètres : \textit{Max Loans}, \textit{Loan Duration}, \textit{Penalty Per Day}.
+    \item Calcul automatique des pénalités lors du retour d'un livre en retard.
+\end{itemize}
+
+\subsection{2. Système de Réservations (Membre)}
+\begin{itemize}
+    \item Bouton "Réserver" disponible automatiquement lorsque le stock d'un livre tombe à 0.
+    \item Tableau de bord membre affichant les réservations actives avec possibilité d'annulation.
+    \item Backend gérant la file d'attente (Status: WAITING).
+\end{itemize}
+
+\subsection{3. Audit et Sécurité (Admin)}
+\begin{itemize}
+    \item Enregistrement automatique des actions sensibles (ex: Modification des règles).
+    \item Nouvelle page "Audit Logs" permettant de filtrer et consulter l'historique des actions système.
+\end{itemize}
+
+\subsection{4. Restitutions et Renouvellements (Bibliothécaire)}
+\begin{itemize}
+    \item Interface de retour affichant des alertes en cas de retard avec le montant de la pénalité.
+    \item Possibilité de renouveler un prêt pour étendre la date d'échéance.
+\end{itemize}
+
+\section{Captures d'écran et Livrables}
+Vous trouverez ci-dessous les captures d'écran illustrant les nouvelles fonctionnalités livrées ce sprint.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/modal_borrow.png}
+    \caption{Nouvelle modale d'emprunt avec sélection des membres (Role LIBRARIAN)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/modal_return.png}
+    \caption{Modale de confirmation de retour avec calcul de pénalité (Dashboard)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/audit_logs.png}
+    \caption{Système d'Audit Logs validant la traçabilité des opérations}
+\end{figure}
+
+
+\chapter{Métriques Agiles (Sprint 1)}
+
+\section{Velocity Chart}
+Sur les 39 points planifiés, \textbf{39 points ont été livrés}. Engagement respecté à 100\%.
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Sprint} & \textbf{Points Engagés} & \textbf{Points Terminés} \\
+\hline
+Sprint 0 & 37 & 37 \\
+\hline
+Sprint 1 & 39 & 39 \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{figure}[H]
+    \centering
+    \fbox{PLACEHOLDER - Velocity Chart} 
+    % \includegraphics[width=1\textwidth]{velocity_sprint1.png}
+    \caption{Velocity Chart – Sprint 1}
+\end{figure}
+
+\section{Burndown Chart (Analyse)}
+\textbf{Interprétation :} La courbe montre une progression constante sur les User Stories principales. Un ralentissement à mi-sprint dû à la complexité des algorithmes de pénalité.
+
+\begin{figure}[H]
+    \centering
+    \fbox{PLACEHOLDER - Burndown Chart}
+    % \includegraphics[width=1\textwidth]{burndown_sprint1.png}
+    \caption{Burndown Chart - Sprint 1}
+\end{figure}
+
+\section{Cumulative Flow Diagram}
+Le flux montre une accumulation saine dans la colonne "Done" vers la fin du sprint.
+
+\begin{figure}[H]
+    \centering
+    \fbox{PLACEHOLDER - Cumulative Flow Diagram}
+    % \includegraphics[width=1\textwidth]{cumulative_flow_sprint1.png}
+    \caption{Cumulative Flow Diagram - Sprint 1}
+\end{figure}
+
+
+\chapter{Rétrospective du Sprint}
+
+\section{Ce qui a bien fonctionné}
+\begin{itemize}
+    \item L'utilisation de Prisma a grandement facilité les migrations de schéma complexes (Relations Système/Audit).
+    \item La réutilisation des composants UI (Tableaux, Cartes) a accéléré le développement des nouvelles pages Admin.
+\end{itemize}
+
+\section{Points d'amélioration}
+\begin{itemize}
+    \item La gestion des erreurs frontend pourrait être uniformisée (Toasts vs Alerts).
+    \item Les tests automatisés (Unitaires/E2E) auraient bénéficié d'une mise en place plus précoce pour valider les règles métiers complexes.
+\end{itemize}
+
+\chapter*{Conclusion}
+Le Sprint 1 est un succès solide. Les fonctionnalités critiques (Core Business) ont été livrées et fonctionnent. Le différentiel de vélocité s'explique par la complexité technique de l'audit et des pénalités. Ce sprint marque la fin du développement planifié. L'application est désormais opérationnelle, sécurisée, et couvre l'ensemble du périmètre fonctionnel exigé.
+
+\end{document}

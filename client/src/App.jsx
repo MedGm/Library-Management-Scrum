@@ -4,6 +4,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import BookList from './pages/BookList';
+import Settings from './pages/Settings';
+import AuditLogs from './pages/AuditLogs';
 import Layout from './components/Layout';
 
 const ProtectedRoute = ({ children }) => {
@@ -21,7 +23,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/books" element={<ProtectedRoute><BookList /></ProtectedRoute>} />
+          <Route path="/settings" element={<ProtectedRoute roles={['ADMIN']}><Settings /></ProtectedRoute>} />
+          <Route path="/audit" element={<ProtectedRoute roles={['ADMIN']}><AuditLogs /></ProtectedRoute>} />
           <Route path="/my-borrowings" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/borrowings" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         </Routes>

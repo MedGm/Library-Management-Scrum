@@ -7,6 +7,9 @@ dotenv.config();
 const authRoutes = require('./routes/auth.routes');
 const bookRoutes = require('./routes/book.routes');
 const borrowingRoutes = require('./routes/borrowing.routes');
+const settingRoutes = require('./routes/setting.routes');
+const reservationRoutes = require('./routes/reservation.routes');
+const auditRoutes = require('./routes/audit.routes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -18,6 +21,10 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/books', bookRoutes);
 app.use('/api/borrowings', borrowingRoutes);
+app.use('/api/settings', settingRoutes);
+app.use('/api/reservations', reservationRoutes);
+app.use('/api/audit', auditRoutes);
+app.use('/api/users', require('./routes/user.routes'));
 
 app.get('/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date() });

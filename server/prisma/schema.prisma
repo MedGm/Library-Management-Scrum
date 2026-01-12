@@ -7,44 +7,91 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// User Model
 model User {
-  id       Int      @id @default(autoincrement())
-  email    String   @unique
-  password String
-  name     String
-  role     String   // ADMIN, LIBRARIAN, MEMBER
-  borrowings Borrowing[]
-  reviews    Review[]
+  id           Int           @id @default(autoincrement())
+  email        String        @unique
+  password     String
+  name         String
+  role         String        @default("MEMBER") // ADMIN, LIBRARIAN, MEMBER
+  createdAt    DateTime      @default(now())
+  borrowings   Borrowing[]
+  reservations Reservation[]
+  auditLogs    AuditLog[]
+  reviews      Review[]
 }
 
+// Book Model
 model Book {
-  id        Int      @id @default(autoincrement())
-  title     String
-  author    String
-  genre     String
-  year      Int
-  status    String   @default("AVAILABLE") // AVAILABLE, BORROWED, LOST, REPAIR
-  borrowings Borrowing[]
-  reviews    Review[]
+  id           Int           @id @default(autoincrement())
+  title        String
+  author       String
+  isbn         String        @unique
+  category     String
+  publishedYear Int
+  stock        Int           @default(1)
+  available    Int           @default(1)
+  coverUrl     String?       // New for Sprint 1
+  createdAt    DateTime      @default(now())
+  borrowings   Borrowing[]
+  reservations Reservation[]
+  reviews      Review[]
 }
 
+// Borrowing Transaction
 model Borrowing {
-  id          Int      @id @default(autoincrement())
-  userId      Int
-  bookId      Int
-  borrowDate  DateTime @default(now())
-  dueDate     DateTime
-  returnDate  DateTime?
-  user        User     @relation(fields: [userId], references: [id])
-  book        Book     @relation(fields: [bookId], references: [id])
+  id         Int       @id @default(autoincrement())
+  userId     Int
+  bookId     Int
+  borrowDate DateTime  @default(now())
+  dueDate    DateTime
+  returnDate DateTime?
+  status     String    @default("ACTIVE") // ACTIVE, RETURNED, OVERDUE
+  penalty    Float?    @default(0.0)      // New for Sprint 1
+  renewals   Int       @default(0)        // New for Sprint 1
+  
+  user       User      @relation(fields: [userId], references: [id])
+  book       Book      @relation(fields: [bookId], references: [id])
 }
 
+// Review Model
 model Review {
-  id      Int    @id @default(autoincrement())
-  userId  Int
-  bookId  Int
-  rating  Int
-  comment String
-  user    User   @relation(fields: [userId], references: [id])
-  book    Book   @relation(fields: [bookId], references: [id])
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  bookId    Int
+  rating    Int
+  comment   String?
+  createdAt DateTime @default(now())
+  
+  user      User     @relation(fields: [userId], references: [id])
+  book      Book     @relation(fields: [bookId], references: [id])
+}
+
+// System Settings (Sprint 1)
+model SystemSetting {
+  key   String @id
+  value String
+}
+
+// Reservations (Sprint 1)
+model Reservation {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  bookId    Int
+  createdAt DateTime @default(now())
+  status    String   @default("PENDING") // PENDING, FULFILLED, CANCELLED
+
+  user      User     @relation(fields: [userId], references: [id])
+  book      Book     @relation(fields: [bookId], references: [id])
+}
+
+// Audit Log (Sprint 1)
+model AuditLog {
+  id        Int      @id @default(autoincrement())
+  action    String
+  userId    Int?
+  details   String?
+  timestamp DateTime @default(now())
+
+  user      User?    @relation(fields: [userId], references: [id])
 }

@@ -1,6 +1,6 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LogOut, Library, BookOpen, Clock, User, Menu } from 'lucide-react';
+import { LogOut, Library, BookOpen, Clock, User, Menu, Settings } from 'lucide-react';
 import { useState } from 'react';
 
 const Navbar = () => {
@@ -65,6 +65,24 @@ const Navbar = () => {
                                     </div>
                                 </div>
 
+                                {user?.role === 'ADMIN' && (
+                                    <Link
+                                        to="/settings"
+                                        className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${location.pathname === '/settings' ? 'bg-primary-50 text-primary-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'}`}
+                                    >
+                                        <Settings className={`h-4 w-4 mr-2 ${location.pathname === '/settings' ? 'text-primary-600' : 'text-gray-400'}`} />
+                                        Settings
+                                    </Link>
+                                )}
+                                {user?.role === 'ADMIN' && (
+                                    <Link
+                                        to="/audit"
+                                        className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${location.pathname === '/audit' ? 'bg-primary-50 text-primary-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'}`}
+                                    >
+                                        <Settings className={`h-4 w-4 mr-2 ${location.pathname === '/audit' ? 'text-primary-600' : 'text-gray-400'}`} />
+                                        Audit Logs
+                                    </Link>
+                                )}
                                 <button
                                     onClick={handleLogout}
                                     className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-full transition-colors"
