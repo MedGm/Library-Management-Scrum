@@ -7,11 +7,13 @@ import BookList from './pages/BookList';
 import Settings from './pages/Settings';
 import AuditLogs from './pages/AuditLogs';
 import Layout from './components/Layout';
+import Home from './pages/Home';
 
-const ProtectedRoute = ({ children }) => {
+const ProtectedRoute = ({ children, roles }) => {
   const { user, loading } = useAuth();
   if (loading) return <div>Loading...</div>;
   if (!user) return <Navigate to="/login" />;
+  if (roles && !roles.includes(user.role)) return <Navigate to="/dashboard" />;
   return <Layout>{children}</Layout>;
 };
 
@@ -20,9 +22,8 @@ function App() {
     <Router>
       <AuthProvider>
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/books" element={<ProtectedRoute><BookList /></ProtectedRoute>} />
           <Route path="/settings" element={<ProtectedRoute roles={['ADMIN']}><Settings /></ProtectedRoute>} />

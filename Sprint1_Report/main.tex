@@ -207,6 +207,19 @@ Le produit contient désormais les fonctionnalités suivantes, testées et dépl
     \item Possibilité de renouveler un prêt pour étendre la date d'échéance.
 \end{itemize}
 
+\subsection{5. Qualité et Déploiement (DevOps)}
+\begin{itemize}
+    \item \textbf{Tests Backend (Jest + Supertest)} : Couverture des algorithmes de pénalité (Unitaires) et des endpoints API (Intégration).
+    \item \textbf{Tests Frontend (Vitest)} : Validation du rendu des composants React et de la navigation.
+    \item \textbf{Déploiement Cloud (CI/CD)} :
+    \begin{itemize}
+        \item Backend déployé sur \textbf{Railway} (Node.js/Express + SQLite).
+        \item Frontend déployé sur \textbf{Vercel} (React/Vite).
+        \item Pipeline de déploiement automatisé via script \texttt{deploy.sh}.
+    \end{itemize}
+    \item \textbf{Documentation} : Rédaction du \texttt{USER\_GUIDE.md} et du Guide de Déploiement Cloud.
+\end{itemize}
+
 \section{Captures d'écran et Livrables}
 Vous trouverez ci-dessous les captures d'écran illustrant les nouvelles fonctionnalités livrées ce sprint.
 
@@ -280,12 +293,12 @@ Le flux montre une accumulation saine dans la colonne "Done" vers la fin du spri
 \begin{itemize}
     \item L'utilisation de Prisma a grandement facilité les migrations de schéma complexes (Relations Système/Audit).
     \item La réutilisation des composants UI (Tableaux, Cartes) a accéléré le développement des nouvelles pages Admin.
+    \item Mise en place réussie d'une stratégie de tests robuste (Unitaires \& Intégration) en fin de sprint.
 \end{itemize}
 
 \section{Points d'amélioration}
 \begin{itemize}
     \item La gestion des erreurs frontend pourrait être uniformisée (Toasts vs Alerts).
-    \item Les tests automatisés (Unitaires/E2E) auraient bénéficié d'une mise en place plus précoce pour valider les règles métiers complexes.
 \end{itemize}
 
 \chapter*{Conclusion}
