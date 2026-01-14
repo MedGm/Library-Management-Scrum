@@ -21,7 +21,11 @@ To handle this, we will configure the server to **re-create and re-seed** the da
     *   `DATABASE_URL`: `file:./dev.db` (Required by Prisma, even for SQLite)
 
 5.  **Deploy**.
-6.  Copy the **Public Domain** (e.g., `https://library-server.up.railway.app`).
+6.  **Get the URL**:
+    *   Go to the **Settings** tab of your service.
+    *   Scroll down to **Networking**.
+    *   Copy this URL: `https://library-management-scrum-production.up.railway.app`
+    *   *Note: This is your live Production Backend.*
 
 ---
 
@@ -36,7 +40,7 @@ To handle this, we will configure the server to **re-create and re-seed** the da
     *   **Output Directory**: `dist`
 
 4.  **Environment Variables**:
-    *   `VITE_API_URL`: Paste the **Railway URL** from Step 1 (e.g., `https://library-server.up.railway.app`).
+    *   `VITE_API_URL`: `https://library-management-scrum-production.up.railway.app`
     *   *Note: Does not need a trailing slash.*
 
 5.  **Deploy**.
