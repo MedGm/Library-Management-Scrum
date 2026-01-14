@@ -18,6 +18,7 @@ To handle this, we will configure the server to **re-create and re-seed** the da
 4.  **Environment Variables**:
     *   `PORT`: `3000` (or let Railway assign it)
     *   `JWT_SECRET`: `mysecretkey` (or any string)
+    *   `DATABASE_URL`: `file:./dev.db` (Required by Prisma, even for SQLite)
 
 5.  **Deploy**.
 6.  Copy the **Public Domain** (e.g., `https://library-server.up.railway.app`).
