@@ -1,4 +1,5 @@
 const { PrismaClient } = require('@prisma/client');
+const { calculatePenalty } = require('../utils/penaltyCalculator');
 const prisma = new PrismaClient();
 
 // Helper: Get System Setting
@@ -64,18 +65,10 @@ exports.returnBook = async (req, res) => {
         if (borrowing.returnDate) return res.status(400).json({ error: 'Book already returned' });
 
         // Calculate Penalty
-        const now = new Date();
-        const due = new Date(borrowing.dueDate);
-        let penalty = 0;
-        let status = 'RETURNED';
+        const penaltyPerDay = await getSetting('PENALTY_PER_DAY', 1.0);
+        const { penalty, isLate } = calculatePenalty(borrowing.dueDate, new Date(), penaltyPerDay);
 
-        if (now > due) {
-            const diffTime = Math.abs(now - due);
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            const penaltyPerDay = await getSetting('PENALTY_PER_DAY', 1.0);
-            penalty = diffDays * penaltyPerDay;
-            status = 'RETURNED_LATE';
-        }
+        const status = isLate ? 'RETURNED_LATE' : 'RETURNED';
 
         const updatedBorrowing = await prisma.$transaction(async (tx) => {
             // Increment Stock
@@ -88,7 +81,7 @@ exports.returnBook = async (req, res) => {
             return await tx.borrowing.update({
                 where: { id: parseInt(id) },
                 data: {
-                    returnDate: now,
+                    returnDate: new Date(),
                     status,
                     penalty
                 }

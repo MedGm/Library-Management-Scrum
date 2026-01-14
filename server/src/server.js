@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const path = require('path');
 
 dotenv.config();
 
@@ -30,6 +31,19 @@ app.get('/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date() });
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+// Serve Frontend (Production)
+const clientBuildPath = path.join(__dirname, '../../client/dist');
+app.use(express.static(clientBuildPath));
+
+// Catch-all handler for React Routing
+app.get('*', (req, res) => {
+    res.sendFile(path.join(clientBuildPath, 'index.html'));
 });
+
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`Server running on http://localhost:${PORT}`);
+    });
+}
+
+module.exports = app;

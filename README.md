@@ -68,3 +68,26 @@ npm run dev
 - **Backend:** Node.js, Express, Prisma ORM, SQLite
 - **Frontend:** React, TailwindCSS, React Router, Vite
 - **Security:** JWT Authentication, Bcrypt Password Hashing, Role-Based Access Control (RBAC)
+
+## 🧪 Testing
+Run the automated test suite:
+```bash
+# Backend Tests (Unit & Integration)
+cd server && npm test
+
+# Frontend Tests (Components)
+cd client && npm test
+```
+
+## 📚 Documentation
+*   [User Guide](docs/USER_GUIDE.md) - Instructions for Members, Librarians, and Admins.
+*   [Cloud Deployment](docs/CLOUD_DEPLOYMENT.md) - **Recommended**: Guide for Vercel/Railway (requires Postgres).
+
+## 🚀 Deployment (Production)
+To build and run the entire application (Backend + Frontend) on a single port:
+
+```bash
+./deploy.sh
+```
+Access the app at `http://localhost:3000`.
+
